@@ -15,8 +15,12 @@ app.use(
   })
 )
 
-app.get('/', async (req, res) => {
-  res.send('hello world')
-})
+const usersController = require('./controllers/usersController')
+const sessionController = require('./controllers/sessionController')
+const transactionsController = require('./controllers/transactionsController')
+
+// app.use('/users', usersController)
+// app.use('/sessions', sessionController)
+// app.use('/transactions', transactionsController)
 
 module.exports = app
