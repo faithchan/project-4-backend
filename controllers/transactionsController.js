@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const Transaction = require('../models/transactionsModel')
+const transactionsSeed = require('../seed/transactionsSeed')
 const methodOverride = require('method-override')
 
 app.use(methodOverride('_method'))
@@ -9,6 +10,16 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', async (req, res) => {
   const tx = await Transaction.find()
   res.send(tx)
+})
+
+app.get('/seed', async (req, res) => {
+  console.log('seeding with data: ', transactionsSeed)
+  try {
+    const seedItems = await Transaction.create(transactionsSeed)
+    res.send(seedItems)
+  } catch (err) {
+    res.send(err.message)
+  }
 })
 
 app.get('/:id', async (req, res) => {

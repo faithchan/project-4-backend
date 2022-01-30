@@ -15,13 +15,15 @@ const transactionSchema = new Schema(
       type: Number,
       required: true,
     },
-    salePrice: {
+    transactedPrice: {
       type: Number,
       required: true,
     },
-    transactionDate: {
-      type: Date,
-      required: true,
+    royaltyRecipient: {
+      type: String,
+    },
+    royaltyAmount: {
+      type: Number,
     },
     transactionStatus: {
       type: String,
