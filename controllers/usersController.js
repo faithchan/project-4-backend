@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const User = require('../models/usersModel')
+const usersSeed = require('../seed/usersSeed')
 const methodOverride = require('method-override')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 app.use(methodOverride('_method'))
@@ -18,6 +18,16 @@ app.get('/', async (req, res) => {
   } catch (err) {
     res.status(500).send('Unexpected error has occured while retreiving users')
     return
+  }
+})
+
+app.get('/seed', async (req, res) => {
+  console.log('seeding with data: ', usersSeed)
+  try {
+    const seedItems = await User.create(usersSeed)
+    res.send(seedItems)
+  } catch (err) {
+    res.send(err.message)
   }
 })
 
