@@ -6,6 +6,7 @@ const tokenSchema = new Schema(
     tokenId: {
       type: Number,
       required: true,
+      unique: true,
     },
     tokenURI: {
       type: String,
@@ -28,7 +29,11 @@ const tokenSchema = new Schema(
     },
     listPrice: {
       type: Number,
-      required: true,
+      default: 0,
+    },
+    status: {
+      type: String,
+      default: 'Unlisted',
     },
   },
   { timestamps: true }
