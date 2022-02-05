@@ -10,10 +10,6 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    type: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
@@ -26,6 +22,11 @@ const userSchema = new Schema(
     walletAddress: {
       type: String,
       unique: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      default: 'user',
     },
     tokensCreated: [
       {
