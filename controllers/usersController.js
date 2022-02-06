@@ -36,9 +36,10 @@ app.post('/', async (req, res) => {
   try {
     const user = await User.create(req.body)
     console.log(user)
-    res.send(user)
+    res.status(200).send(user)
   } catch (error) {
-    console.log(error.message)
+    console.error(error)
+    res.status(401).send(error)
   }
 })
 

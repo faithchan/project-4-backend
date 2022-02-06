@@ -36,9 +36,16 @@ app.get('/:id', async (req, res) => {
 
 app.post('/', async (req, res) => {
   console.log('new Token: ', req.body)
-  const token = await Token.create(req.body)
-  res.send(token._id)
-  console.log('token: ', token._id)
+  try {
+    const token = await Token.create(req.body)
+    res.send(token._id)
+    console.log('token: ', token._id)
+  } catch (err) {
+    return res.status(401).send({
+      status: 401,
+      message: 'Error adding token to database',
+    })
+  }
 })
 
 app.delete('/:id', async (req, res) => {

@@ -28,6 +28,11 @@ const userSchema = new Schema(
       required: true,
       default: 'user',
     },
+    whitelistStatus: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     tokensCreated: [
       {
         type: [Number],

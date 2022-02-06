@@ -8,16 +8,17 @@ const tokenSchema = new Schema(
       required: true,
       unique: true,
     },
-    tokenURI: {
-      type: String,
-      required: true,
-    },
+
     name: {
       type: String,
       required: true,
     },
     description: {
       type: String,
+    },
+    image: {
+      type: String,
+      required: true,
     },
     creator: {
       type: String,
