@@ -21,11 +21,14 @@ app.get('/', async (req, res) => {
   }
 })
 
-// app.get('/:id', async (req, res) => {
-//   const { id } = req.params
-//   const user = await User.findById(id)
-//   console.log('user: ', user)
-//   res.send(user)
+// app.get('/drop', async (req, res) => {
+//   console.log('dropping users collection')
+//   try {
+//     const txn = await User.collection.drop()
+//     res.send(txn)
+//   } catch (err) {
+//     res.send(err.message)
+//   }
 // })
 
 app.get('/whitelist', async (req, res) => {
@@ -64,15 +67,22 @@ app.get('/created/:address', async (req, res) => {
   }
 })
 
-// app.get('/seed', async (req, res) => {
-//   console.log('seeding with data: ', usersSeed)
-//   try {
-//     const seedItems = await User.create(usersSeed)
-//     res.send(seedItems)
-//   } catch (err) {
-//     res.send(err.message)
-//   }
-// })
+app.get('/seed', async (req, res) => {
+  console.log('seeding with data: ', usersSeed)
+  try {
+    const seedItems = await User.create(usersSeed)
+    res.send(seedItems)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
+
+app.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const user = await User.findById(id)
+  console.log('user: ', user)
+  res.send(user)
+})
 
 app.post('/', async (req, res) => {
   console.log(req.body)
@@ -91,6 +101,11 @@ app.put('/:address', async (req, res) => {
     new: true,
   })
   res.send(user)
+})
+
+app.delete('/all', async (req, res) => {
+  const receipt = await User.deleteMany({})
+  res.send(receipt)
 })
 
 app.delete('/:id', async (req, res) => {

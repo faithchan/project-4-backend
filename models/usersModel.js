@@ -39,15 +39,15 @@ const userSchema = new Schema(
       required: true,
       default: false,
     },
-    tokensCreated: [
+    followers: [
       {
-        type: [Number],
+        type: [String], // wallet addresses
         unique: true,
       },
     ],
-    tokensOwned: [
+    following: [
       {
-        type: Number,
+        type: [String], // wallet addresses
         unique: true,
       },
     ],
