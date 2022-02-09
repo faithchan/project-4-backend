@@ -26,7 +26,13 @@ const userSchema = new Schema(
     type: {
       type: String,
       required: true,
-      default: 'user',
+      default: 'user', // designer + admin
+    },
+    avatar: {
+      type: String,
+      required: true,
+      default:
+        'https://bafkreigj5xab3lrgu7nty4r2sqwbfqkudeed7pz2w7fvajnflgphyw6nlu.ipfs.infura-ipfs.io/',
     },
     whitelistStatus: {
       type: Boolean,

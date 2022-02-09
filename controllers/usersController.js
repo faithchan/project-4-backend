@@ -16,20 +16,63 @@ app.get('/', async (req, res) => {
     console.log(users)
     res.send(users)
   } catch (err) {
-    res.status(500).send('Unexpected error has occured while retreiving users')
+    res.status(500).send('Error occured while retreiving users')
     return
   }
 })
 
-app.get('/seed', async (req, res) => {
-  console.log('seeding with data: ', usersSeed)
+// app.get('/:id', async (req, res) => {
+//   const { id } = req.params
+//   const user = await User.findById(id)
+//   console.log('user: ', user)
+//   res.send(user)
+// })
+
+app.get('/whitelist', async (req, res) => {
+  console.log('User Controller: Trying to get whitelisted users')
   try {
-    const seedItems = await User.create(usersSeed)
-    res.send(seedItems)
+    const users = await User.find({ whitelistStatus: true })
+    console.log(users)
+    res.send(users)
   } catch (err) {
-    res.send(err.message)
+    res.status(500).send('Error occured while retreiving whitelisted users')
+    return
   }
 })
+
+app.get('/owned/:address', async (req, res) => {
+  console.log('User Controller: Trying to get tokens owned')
+  try {
+    const user = await User.find({ walletAddress: req.params.address })
+    console.log(user)
+    res.send(user)
+  } catch (err) {
+    res.status(500).send('Error occured while retreiving tokens owned')
+    return
+  }
+})
+
+app.get('/created/:address', async (req, res) => {
+  console.log('User Controller: Trying to get tokens owned')
+  try {
+    const user = await User.findOne({ walletAddress: req.params.address })
+    console.log(user)
+    res.send(user)
+  } catch (err) {
+    res.status(500).send('Error occured while retreiving tokens created')
+    return
+  }
+})
+
+// app.get('/seed', async (req, res) => {
+//   console.log('seeding with data: ', usersSeed)
+//   try {
+//     const seedItems = await User.create(usersSeed)
+//     res.send(seedItems)
+//   } catch (err) {
+//     res.send(err.message)
+//   }
+// })
 
 app.post('/', async (req, res) => {
   console.log(req.body)
@@ -40,6 +83,23 @@ app.post('/', async (req, res) => {
   } catch (error) {
     console.error(error)
     res.status(401).send(error)
+  }
+})
+
+app.put('/:address', async (req, res) => {
+  const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
+    new: true,
+  })
+  res.send(user)
+})
+
+app.delete('/:id', async (req, res) => {
+  try {
+    console.log('User Controller: Trying to delete an user')
+    const user = await User.findOneAndDelete({ _id: req.params.id })
+    res.send(`This ${user.username} has been deleted`)
+  } catch (error) {
+    console.log('Delete User Controller Error: ' + error.message)
   }
 })
 
@@ -66,23 +126,6 @@ app.use((req, res, next) => {
     res.status(401).send('Expired or Invalid Token, Please Login')
     return
   }
-})
-
-app.delete('/:id', async (req, res) => {
-  try {
-    console.log('User Controller: Trying to delete an user')
-    const user = await User.findOneAndDelete({ _id: req.params.id })
-    res.send(`This ${user.username} has been deleted`)
-  } catch (error) {
-    console.log('Delete User Controller Error: ' + error.message)
-  }
-})
-
-app.put('/:id', async (req, res) => {
-  const user = await User.updateOne({ _id: req.params.id }, req.body, {
-    new: true,
-  })
-  res.send(user)
 })
 
 module.exports = app
