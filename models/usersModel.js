@@ -21,12 +21,11 @@ const userSchema = new Schema(
     },
     walletAddress: {
       type: String,
-      unique: true,
     },
     type: {
       type: String,
       required: true,
-      default: 'user', // designer + admin
+      default: 'user',
     },
     avatar: {
       type: String,
@@ -34,21 +33,18 @@ const userSchema = new Schema(
       default:
         'https://bafkreigj5xab3lrgu7nty4r2sqwbfqkudeed7pz2w7fvajnflgphyw6nlu.ipfs.infura-ipfs.io/',
     },
-    whitelistStatus: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     followers: [
       {
         type: [String], // wallet addresses
         unique: true,
+        default: [],
       },
     ],
     following: [
       {
         type: [String], // wallet addresses
         unique: true,
+        default: [],
       },
     ],
   },

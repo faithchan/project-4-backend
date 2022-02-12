@@ -32,7 +32,7 @@ app.post('/', async (req, res) => {
     // encode jwt and send
     const token = jwt.sign(
       {
-        sub: user.email,
+        email: user.email,
         role: user.type,
         walletAddress: user.walletAddress,
       },

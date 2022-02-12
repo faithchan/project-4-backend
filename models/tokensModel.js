@@ -8,7 +8,6 @@ const tokenSchema = new Schema(
       required: true,
       unique: true,
     },
-
     name: {
       type: String,
       required: true,
@@ -32,9 +31,9 @@ const tokenSchema = new Schema(
       type: Number,
       default: 0,
     },
-    status: {
-      type: String,
-      default: 'Unlisted',
+    isListed: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

@@ -21,15 +21,15 @@ app.get('/', async (req, res) => {
   }
 })
 
-// app.get('/drop', async (req, res) => {
-//   console.log('dropping users collection')
-//   try {
-//     const txn = await User.collection.drop()
-//     res.send(txn)
-//   } catch (err) {
-//     res.send(err.message)
-//   }
-// })
+app.get('/drop', async (req, res) => {
+  console.log('dropping users collection')
+  try {
+    const txn = await User.collection.drop()
+    res.send(txn)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
 
 app.get('/whitelist', async (req, res) => {
   console.log('User Controller: Trying to get whitelisted users')
@@ -96,8 +96,16 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.put('/:address', async (req, res) => {
-  const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
+// app.put('/:address', async (req, res) => {
+//   const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
+//     new: true,
+//   })
+//   res.send(user)
+// })
+
+app.put('/:id', async (req, res) => {
+  console.log('req params:', req.params.id)
+  const user = await User.updateOne({ _id: req.params.id }, req.body, {
     new: true,
   })
   res.send(user)
