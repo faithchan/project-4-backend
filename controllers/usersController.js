@@ -1,5 +1,5 @@
 const express = require('express')
-const app = express()
+const app = express.Router()
 const User = require('../models/usersModel')
 const usersSeed = require('../seed/usersSeed')
 const methodOverride = require('method-override')
@@ -7,6 +7,11 @@ const jwt = require('jsonwebtoken')
 
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
+
+// app.use((req, res, next) => {
+//   console.log('hwsdfdsfsf')
+//   next()
+// })
 
 app.get('/', async (req, res) => {
   console.log('User Controller: Trying to get users')
