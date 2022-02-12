@@ -36,14 +36,12 @@ const userSchema = new Schema(
     followers: [
       {
         type: [String], // wallet addresses
-        unique: true,
         default: [],
       },
     ],
     following: [
       {
         type: [String], // wallet addresses
-        unique: true,
         default: [],
       },
     ],
