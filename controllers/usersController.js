@@ -48,30 +48,6 @@ app.get('/whitelist', async (req, res) => {
   }
 })
 
-app.get('/owned/:address', async (req, res) => {
-  console.log('User Controller: Trying to get tokens owned')
-  try {
-    const user = await User.find({ walletAddress: req.params.address })
-    console.log(user)
-    res.send(user)
-  } catch (err) {
-    res.status(500).send('Error occured while retreiving tokens owned')
-    return
-  }
-})
-
-app.get('/created/:address', async (req, res) => {
-  console.log('User Controller: Trying to get tokens owned')
-  try {
-    const user = await User.findOne({ walletAddress: req.params.address })
-    console.log(user)
-    res.send(user)
-  } catch (err) {
-    res.status(500).send('Error occured while retreiving tokens created')
-    return
-  }
-})
-
 app.get('/seed', async (req, res) => {
   console.log('seeding with data: ', usersSeed)
   try {
@@ -82,10 +58,8 @@ app.get('/seed', async (req, res) => {
   }
 })
 
-app.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const user = await User.findById(id)
-  console.log('user: ', user)
+app.get('/:address', async (req, res) => {
+  const user = await User.find({ walletAddress: req.params.address })
   res.send(user)
 })
 
@@ -100,13 +74,6 @@ app.post('/', async (req, res) => {
     res.status(401).send(error)
   }
 })
-
-// app.put('/:address', async (req, res) => {
-//   const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
-//     new: true,
-//   })
-//   res.send(user)
-// })
 
 app.put('/:id', async (req, res) => {
   console.log('req params:', req.params.id)

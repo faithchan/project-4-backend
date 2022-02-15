@@ -10,11 +10,6 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
-app.use((req, res, next) => {
-  console.log('got here')
-  next()
-})
-
 app.use(
   cors({
     origin: CORS_WHITELIST,
