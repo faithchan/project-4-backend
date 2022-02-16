@@ -18,12 +18,12 @@ app.use(
 
 const usersController = require('./controllers/usersController')
 const sessionController = require('./controllers/sessionController')
-const transactionsController = require('./controllers/transactionsController')
-const tokensController = require('./controllers/tokensController')
+// const transactionsController = require('./controllers/transactionsController')
+// const tokensController = require('./controllers/tokensController')
 
 app.use('/users', usersController)
 app.use('/sessions', sessionController)
-app.use('/tokens', tokensController)
-app.use('/transactions', transactionsController)
+// app.use('/tokens', tokensController)
+// app.use('/transactions', transactionsController)
 
 module.exports = app

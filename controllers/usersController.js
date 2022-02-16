@@ -77,8 +77,6 @@ app.post('/', async (req, res) => {
 })
 
 app.put('/:address', async (req, res) => {
-  // console.log('req params:', req.params.address)
-  // console.log('req body: ', req.body)
   const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
     new: true,
   })
