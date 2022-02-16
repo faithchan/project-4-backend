@@ -21,6 +21,7 @@ const userSchema = new Schema(
     },
     walletAddress: {
       type: String,
+      unique: true,
     },
     type: {
       type: String,

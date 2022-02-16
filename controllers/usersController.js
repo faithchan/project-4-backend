@@ -8,11 +8,6 @@ const jwt = require('jsonwebtoken')
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 
-// app.use((req, res, next) => {
-//   console.log('hwsdfdsfsf')
-//   next()
-// })
-
 app.get('/', async (req, res) => {
   console.log('User Controller: Trying to get users')
   console.log(req.context)
@@ -58,7 +53,13 @@ app.get('/seed', async (req, res) => {
   }
 })
 
+app.get('/profile/:username', async (req, res) => {
+  const user = await User.find({ username: req.params.username })
+  res.send(user)
+})
+
 app.get('/:address', async (req, res) => {
+  console.log('address: ', req.params.address)
   const user = await User.find({ walletAddress: req.params.address })
   res.send(user)
 })
@@ -75,9 +76,10 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.put('/:id', async (req, res) => {
-  console.log('req params:', req.params.id)
-  const user = await User.updateOne({ _id: req.params.id }, req.body, {
+app.put('/:address', async (req, res) => {
+  // console.log('req params:', req.params.address)
+  // console.log('req body: ', req.body)
+  const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
     new: true,
   })
   res.send(user)
