@@ -8,19 +8,6 @@ const jwt = require('jsonwebtoken')
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', async (req, res) => {
-  console.log('User Controller: Trying to get users')
-  console.log(req.context)
-  try {
-    const users = await User.find()
-    console.log(users)
-    res.send(users)
-  } catch (err) {
-    res.status(500).send('Error occured while retreiving users')
-    return
-  }
-})
-
 app.get('/drop', async (req, res) => {
   console.log('dropping users collection')
   try {
@@ -59,9 +46,21 @@ app.get('/profile/:username', async (req, res) => {
 })
 
 app.get('/:address', async (req, res) => {
-  console.log('address: ', req.params.address)
   const user = await User.find({ walletAddress: req.params.address })
   res.send(user)
+})
+
+app.get('/', async (req, res) => {
+  console.log('User Controller: Trying to get users')
+  console.log(req.context)
+  try {
+    const users = await User.find()
+    console.log(users)
+    res.send(users)
+  } catch (err) {
+    res.status(500).send('Error occured while retreiving users')
+    return
+  }
 })
 
 app.post('/', async (req, res) => {
