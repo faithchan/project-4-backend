@@ -34,6 +34,7 @@ app.post('/', async (req, res) => {
       {
         email: user.email,
         role: user.type,
+        username: user.username,
         walletAddress: user.walletAddress,
       },
       process.env.SECRET,
