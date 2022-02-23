@@ -75,6 +75,18 @@ app.post('/', async (req, res) => {
   }
 })
 
+app.put('/edit/:id', async (req, res) => {
+  try {
+    const user = await User.updateOne({ _id: req.params.id }, req.body, {
+      new: true,
+    })
+    res.send(user)
+  } catch (err) {
+    console.log(err)
+    res.status(401).send('Error updating user profile')
+  }
+})
+
 app.put('/:address', async (req, res) => {
   const user = await User.updateOne({ walletAddress: req.params.address }, req.body, {
     new: true,
