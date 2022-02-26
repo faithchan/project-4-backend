@@ -45,11 +45,6 @@ app.get('/profile/:username', async (req, res) => {
   res.send(user)
 })
 
-app.get('/:address', async (req, res) => {
-  const user = await User.find({ walletAddress: req.params.address })
-  res.send(user)
-})
-
 app.get('/', async (req, res) => {
   console.log('User Controller: Trying to get users')
   console.log(req.context)
@@ -61,6 +56,11 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error occured while retreiving users')
     return
   }
+})
+
+app.get('/:address', async (req, res) => {
+  const user = await User.find({ walletAddress: req.params.address })
+  res.send(user)
 })
 
 app.post('/', async (req, res) => {
