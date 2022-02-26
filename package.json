@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1", 
     "start": "node index.js"
+=======
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 51cd0ea41bd51f548f8276b9068210ac4e959f64
   },
   "keywords": [],
   "author": "",
